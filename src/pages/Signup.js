@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signup } from '../firebase/auth';
-import { Link } from 'react-router-dom';
 import FormError from '../FormError';
 
 
@@ -46,9 +45,10 @@ function Signup(props){
     };
 
     
-           
+    const formClassName = `text-center mt-4 ${isLoading ? 'loading': ''} `;
+
     return(
-    <div className='text-center mt-4'>
+    <div className={formClassName}>
         <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
             <div className="container">
             <div className="row justify-content-center">

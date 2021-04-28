@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../firebase/auth';
-import { Link } from 'react-router-dom';
 import FormError from '../FormError';
 
 function Login(props) {
   const { register, handleSubmit, reset } = useForm();
   const [isLoading, setLoading] = useState(false);
   const [errorMsg, setError] = useState(null);
-//   const [isLogin, setLogin] = useState(false);
-//   setLogin(true);
-
-//   const routeOnLogin = async (user) => {
-//     const token = await user.getIdTokenResult(); 
-//     if(token.claims.admin){
-//       props.history.push('/users');
-//     }else{
-//       props.history.push(`/profile/${user.uid}`);
-//     }
-//   }
-
-
 
   const onSubmit = async (data) =>{
       let user; 

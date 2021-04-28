@@ -79,7 +79,7 @@ const Profile = () => {
     
     <div className={formClassname}>
         <h2 className="font-weight-dark mt-2 mb-5">Profile Page</h2>
-        <p>edit information</p>
+        {/* <p>edit information</p> */}
         <hr/>
         <div className="row">
             <div className="col-sm-4">

@@ -1,10 +1,8 @@
 
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { useHistory,useLocation } from 'react-router-dom';
 import { useSession } from '../firebase/UserProvider';
-import Signup from '../pages/Signup';
-import Login from '../pages/Login';
+
 
 function Home(){
           const biggerLead = {

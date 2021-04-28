@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useState} from 'react';
 import {FaUser,FaUsers, FaAngleDown} from 'react-icons/fa';
 import {Link} from '@reach/router';
 import { logout } from './firebase/auth';

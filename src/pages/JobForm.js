@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useSession } from '../firebase/UserProvider';
 import {useForm} from 'react-hook-form';
-import { firestore, storage} from '../firebase/config';
+import { firestore} from '../firebase/config';
 
 
 const JobForm= (props) => {

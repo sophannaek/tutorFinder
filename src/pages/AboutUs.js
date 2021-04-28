@@ -9,7 +9,6 @@ import {firestore} from '../firebase/config';
 
 
 function AboutUs() {
-    const history = useHistory(); 
     const { user } = useSession(); 
     const [usertype, setUsertype] = useState("")
     if(user){

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase/config';
 import { Link } from 'react-router-dom';
-import {GoStar,GoMail} from 'react-icons/go';
-import {FaLink} from 'react-icons/fa';
+import {GoMail} from 'react-icons/go';
+// import {FaLink} from 'react-icons/fa';
 
 
 const Tutors = () =>{
@@ -23,8 +23,6 @@ const Tutors = () =>{
         });
         return unsubscribe;
       }, []);
-
-
 
     return (
         

@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useSession } from '../firebase/UserProvider';
 import {firestore} from '../firebase/config';
-import {useParams} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
-import { updateUserDocument } from '../firebase/user';
-import { ProfileImage } from '../ProfileImage';
 import {getDownloadUrl} from '../firebase/user';
+
 const TutorProfile = (tutor) => {
     const { user } = useSession(); 
     // need an ability to pass the tutorId to this page 
@@ -54,7 +51,6 @@ const TutorProfile = (tutor) => {
       <div className={formClassname}> 
 
           <div className="container" >
-          {/* <ProfileImage id={tutorDocument.uid} /> */}
             <div className="row">
                
                 <div className="col-sm-4">
@@ -65,7 +61,7 @@ const TutorProfile = (tutor) => {
                         // height="50%"
                     />
                     <div>
-                    <a className="nav-item nav-link" href="">Schedule a lesson with <b>{tutorDocument.name}</b> today! </a>
+                    <a className="nav-item nav-link" href={`mailto:${tutor.email}`}>Schedule a lesson with <b>{tutorDocument.name}</b> today! </a>
 
                     </div>
                     

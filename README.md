@@ -1,3 +1,27 @@
+
+# tutorFinder
+A tutoring web application where users can be signed up either as tutor or student. The application is implemented in React JS and uses Google Firebase for user authentication, database, and file storages.
+
+
+## Common Setup
+Clone the repo and install the dependencies 
+
+```bash
+git clone https://github.com/sophannaek/tutorFinder.git
+cd tutorFinder
+```
+
+Use the package manager [npm](https://nodejs.org/en/download/) to install the dependency 
+
+```bash
+npm install
+```
+
+## Google Firebase API
+Sign up for [Google Firebase account] (https://firebase.google.com)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

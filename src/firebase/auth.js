@@ -3,7 +3,6 @@ import 'firebase/auth';
 import { createUserDocument } from './user';
 
 
-
 export const signup = async ({ displayName,email, password}) => {    
   const resp = await firebase
     .auth()

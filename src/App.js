@@ -10,7 +10,6 @@ import Profile from './pages/Profile';
 import PrivateRoute from './router/PrivateRoute';
 import ProfileRedirect from './router/ProfileRedirect';
 import AboutUs from './pages/AboutUs';
-import Home from './pages/Home';
 import Tutors from './pages/Tutors';
 import TutorProfile from './pages/TutorProfile';
 import JobForm from './pages/JobForm';
