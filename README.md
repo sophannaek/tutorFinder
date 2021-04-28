@@ -18,7 +18,7 @@ npm install
 ```
 
 ## Google Firebase API
-Sign up for [Google Firebase account] (https://firebase.google.com)
+Sign up for [Google Firebase account](https://firebase.google.com)
 
 
 
