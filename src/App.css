@@ -36,3 +36,54 @@
     transform: rotate(360deg);
   }
 }
+
+
+.custom-btn{
+  background-color: #097295;
+  color:white;
+}
+
+.ui.card.login-card {
+  width: 450px;
+}
+
+.ui.form input[type='text'],
+.ui.form input[type='password'],
+.ui.form select {
+  margin-top: 10px;
+}
+
+
+.ui.button,
+.ui.input,
+.ui.form input {
+  font-family: 'Titillium Web', sans-serif !important;
+}
+
+
+
+.biggerLead{
+  font-size: 1.4 +'em';
+  font-weight: 200;
+}
+.bigLead{
+  color:#097295;
+  border-color:#097295;
+}
+
+.profile-image img {
+  width: 100%;
+  height: auto;
+}
+
+.file-input {
+  display: none;
+}
+
+
+.left{
+  text-align:left;
+}
+a{
+  color:black;
+}
