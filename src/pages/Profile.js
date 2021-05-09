@@ -108,9 +108,34 @@ const Profile = () => {
                     {/* <h3 style={{ textAlign: 'left'}}>Edit your info</h3> */}
                     {/* <div className="col-sm-8 "> */}
                     
+                    {/* <div className="row">
+                    <p>Display Name: {form.name}</p>
+                        <table className='table left'>
+                            <tr>
+                                <th>Bio</th>
+                                <td>{form.bio}</td>
+                            </tr>
+                            <tr>
+                                <th>Expertise</th>
+                                <td>{form.subjectName}</td>
+                            </tr>
+                            <tr>
+                                <th>Rate</th>
+                                <td>$ {form.payRate}</td>
+                            </tr>
+                            <tr>
+                                <th>Hours Tutored</th>
+                                <td>{form.hoursTutored}</td>
+                            </tr>
+                           
+                        </table>
+
+                    </div> */}
                 
                     <div className="form-row">
+                        
                         <section className="col-sm-6 form-group">
+
 
                         <label >Display Name</label>
                         <input

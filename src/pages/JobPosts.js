@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase/config';
-import  FilterResults from 'react-filter-search';
 import SearchResults from 'react-filter-search';
 import {useForm} from 'react-hook-form';
 
@@ -39,6 +38,11 @@ const JobPosts = () =>{
         }
     }
 
+    const onSubmit = async(keyword) => {
+      console.log("Searching for tutors that tutoring  " + keyword);
+    }
+
+    
     function Post(props){
       return (
         <div className={'card-body justify-content jobpost' } >
@@ -59,9 +63,7 @@ const JobPosts = () =>{
     };
 
 
-    const onSubmit = async(keyword) => {
-      console.log("Searching for tutors that tutoring  " + keyword);
-    }
+   
 
 
     return (

@@ -45,7 +45,7 @@ const TutorProfile = (tutor) => {
     return null;
   }
   //class name for the form with repsect to the loading state
-  const formClassname = `container mt-3 ${isLoading ?'loading': ''}`;
+  const formClassname = `container mt-5 ${isLoading ?'loading': ''}`;
   
   return (
       <div className={formClassname}> 
