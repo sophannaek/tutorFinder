@@ -14,6 +14,7 @@ import Tutors from './pages/Tutors';
 import TutorProfile from './pages/TutorProfile';
 import JobForm from './pages/JobForm';
 import JobPosts from './pages/JobPosts';
+import EditProfile from './pages/EditProfile';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route exact path="/jobPosts" component={JobPosts} />
               <Route exact path="/tutors/profile/:id" component = {TutorProfile} />
               <Route exact path="/jobform" component={JobForm} />
+              <Route exact path='/editprofile/:id' component={EditProfile}  />
             </Switch> 
           
           </BrowserRouter>

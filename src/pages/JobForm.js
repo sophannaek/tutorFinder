@@ -2,7 +2,9 @@ import {useState} from 'react';
 import { useSession } from '../firebase/UserProvider';
 import {useForm} from 'react-hook-form';
 import { firestore} from '../firebase/config';
+import firebase from 'firebase';
 
+// need to add timestamp 
 
 const JobForm= (props) => {
     const { user } = useSession();
@@ -21,7 +23,10 @@ const JobForm= (props) => {
             email:user.email,
             subject: data.subject,
             maxRate: data.maxRate, 
-            time: data.time
+            time: data.time,
+            // created: firebase.database.ServerValue.TIMESTAMP
+            created: firebase.firestore.FieldValue.serverTimestamp()
+
         }
         
         await docRef.set(job)

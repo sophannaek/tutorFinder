@@ -7,7 +7,7 @@ import { updateUserDocument } from '../firebase/user';
 import { ProfileImage } from '../ProfileImage';
 
 
-const Profile = () => {
+const EditProfile = (props) => {
   const { user } = useSession();
   const params = useParams(); 
   //add form register
@@ -62,6 +62,9 @@ const Profile = () => {
       setLoading(true);
       // add the document using  uid and add the rest of the document 
       await updateUserDocument({uid: params.id,  ...form});
+
+      //redirect to user profile
+      await props.history.push(`/profile/${params.id}`);
     }catch(error){
       console.log(error);
     }finally{
@@ -78,7 +81,7 @@ const Profile = () => {
   return (
     
     <div className={formClassname}>
-        <h2 className="font-weight-dark mt-2 mb-5">Profile Page</h2>
+        <h2 className="font-weight-dark mt-2 mb-5">Edit Your Profile</h2>
         {/* <p>edit information</p> */}
         <hr/>
         <div className="row">
@@ -92,12 +95,6 @@ const Profile = () => {
                     <Link className="nav-item nav-link"
                          to={`/JobForm/`}
                     >Create a tutoring request</Link> 
-              </button>
-
-              <button className = "btn btn-sm btn-outline-secondary" title="view profile">
-                    <Link className="nav-item nav-link"
-                         to={`/editprofile/${params.id}`}
-                    >Edit Your Profile</Link> 
               </button>
                 </div>
             </div>
@@ -289,7 +286,7 @@ const Profile = () => {
   )
 }
 
-export default Profile;
+export default EditProfile;
 
 
 
