@@ -1,14 +1,21 @@
 import React ,{ useRef , useState,useEffect} from 'react';
 import { uploadImage, getDownloadUrl } from './firebase/user';
 
-export const ProfileImage = ({ id }) => {
+export const ProfileImage = ({ id, readOnly }) => {
     //Handle the upload triggerign 
     const fileInput = useRef(null);
     const [imageUrl, setImageUrl] = useState('');
     const [uploadProgress, setUploadProgress] = useState(0);
     
     useEffect(() => {
-        getDownloadUrl(id).then((url) => !!url && setImageUrl(url));
+        try{
+            getDownloadUrl(id).then((url) => !!url && setImageUrl(url));
+        }
+        catch(error){
+            console.log(error);
+        }
+        
+        
     }, [id]);
 
 
@@ -38,15 +45,20 @@ export const ProfileImage = ({ id }) => {
                 onChange={(e) => fileChange(e.target.files)}
             />
 
+            { !readOnly && 
             <progress style = {{ width: '100%'}} 
                 max="100"
                 value ={uploadProgress}
             ></progress>
+            }
+            
+            {!readOnly &&
             
             <button 
                 className="ui grey button upload-button"
                 onClick = {() => fileInput.current.click()}
                 >Upload Photo</button>
+            }
         </div>
     );
 

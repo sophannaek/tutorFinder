@@ -11,7 +11,7 @@ const EditProfile = (props) => {
   const { user } = useSession();
   const params = useParams(); 
   //add form register
-  const {register, setValue, handleSubmit} = useForm(); 
+  const {register, handleSubmit} = useForm(); 
   const [isLoading, setLoading]= useState(false);
   const [form, setForm] = useState({
       name: user.name,
@@ -31,6 +31,7 @@ const EditProfile = (props) => {
   //this effect depends on user.uid and the setValue 
   useEffect(()=>{
     // console.log(params.id)
+    
     const docRef = firestore.collection('users').doc(params.id);
 
     // use snapshot --> provide real time changes without have to refresh the browser
@@ -42,27 +43,26 @@ const EditProfile = (props) => {
       }
     });
     return unsubscribe; 
-  },[ user.uid, setValue,params.id]);
+  },[ user.uid, params.id]);
 
   const handleChange = async(e) =>{
       e.preventDefault(); 
-      console.log(form);
       //use spread operator 
     await setForm({
         ...form,
         [e.target.name]:e.target.value,
     });
-    // console.log(form)
+    
   }
 
-  const onSubmit = async(form) => {
+  const onSubmit = async() => {
+    //do not pass the data right into function since it will only update the one that has changed. 
+    // alert(JSON.stringify(form));
     try{
-        console.log("updating")
-        console.log(form)
       setLoading(true);
       // add the document using  uid and add the rest of the document 
-      await updateUserDocument({uid: params.id,  ...form});
-
+    await updateUserDocument({uid: params.id,...form});
+            
       //redirect to user profile
       await props.history.push(`/profile/${params.id}`);
     }catch(error){
@@ -82,15 +82,13 @@ const EditProfile = (props) => {
     
     <div className={formClassname}>
         <h2 className="font-weight-dark mt-2 mb-5">Edit Your Profile</h2>
-        {/* <p>edit information</p> */}
         <hr/>
         <div className="row">
             <div className="col-sm-4">
                 <div className="mt-2" style={{ maxWidth: 560}}>
-                    <ProfileImage id={params.id} />
+                    <ProfileImage id={params.id} readOnly={false} />
                 </div>
                 <div className="mt-5">
-                    {/* <p>create a tutoring request</p> */}
                     <button className = "btn btn-sm btn-outline-secondary" title="view profile">
                     <Link className="nav-item nav-link"
                          to={`/JobForm/`}
@@ -101,11 +99,7 @@ const EditProfile = (props) => {
             <div className="col-sm-8">
                  
             <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
-                <div className="container">
-                    {/* <h3 style={{ textAlign: 'left'}}>Edit your info</h3> */}
-                    {/* <div className="col-sm-8 "> */}
-                    
-                
+                <div className="container">         
                     <div className="form-row">
                         <section className="col-sm-6 form-group">
 
@@ -117,8 +111,8 @@ const EditProfile = (props) => {
                             name="name"
                             value = {form.name}
                             {...register('name')}
-                            onChange={handleChange}
-                            
+                            onChange={handleChange}    
+                            // onChange={e => { setName({ name: e.target.value})}}     
                             
                         />
                         </section>
@@ -132,9 +126,6 @@ const EditProfile = (props) => {
                             name="email"
                             disabled
                             value = {form.email}
-                            // {...register('email')}
-                            // onChange ={e => setName(e.target.value )}
-                            onChange={handleChange}
                             
                         />
                         </section>
@@ -148,6 +139,8 @@ const EditProfile = (props) => {
                             value={form.bio}
                             {...register('bio')}
                             onChange={handleChange}
+                            // onChange={e => {setBio({bio: e.target.value})}}
+
                         />
 
                     </div>
@@ -162,6 +155,7 @@ const EditProfile = (props) => {
                                 value={form.userType}
                                 {...register('userType')}
                                 onChange={handleChange}
+                                // onChange= {e => setForm({...form, userType: e.target.value})}
                                 >
                                 <option value="signup">Sign Up As ...</option>
                                 <option value="tutor">Tutor</option>
@@ -171,17 +165,17 @@ const EditProfile = (props) => {
                         </section>
                         <section className="col-sm-6 form-group">
 
-                        <label>Pay Rate (USD)</label>
-                        <input
-                            className="form-control"
-                            type="number"
-                            id="payRate"
-                            name="payRate"
-                            value = {form.payRate}
-                            {...register('payRate')}
-                            onChange={handleChange}
-                            
-                        />
+                            <label>Pay Rate (USD)</label>
+                            <input
+                                className="form-control"
+                                type="number"
+                                id="payRate"
+                                name="payRate"
+                                value = {form.payRate}
+                                {...register('payRate')}
+                                onChange={handleChange}
+                                
+                            />
                         </section>
                     </div>
                     <div className="form-group">
@@ -220,7 +214,6 @@ const EditProfile = (props) => {
                             name="city"
                             value = {form.city}
                             {...register('city')}
-                            // onChange ={e => setName(e.target.value )}
                             onChange={handleChange}
                             
                         />
@@ -274,8 +267,7 @@ const EditProfile = (props) => {
                         </button>
                     </div>
                     </div>
-            {/* </div> */}
-        </form>
+            </form>
 
             </div>
         </div>

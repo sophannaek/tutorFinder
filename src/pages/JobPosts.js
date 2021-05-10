@@ -9,7 +9,7 @@ import {useForm} from 'react-hook-form';
 const JobPosts = () =>{
     const [jobs, setJobs] = useState([]);
     const [keyword, setKeyword] = useState('');
-    const {register, setValue, handleSubmit} = useForm(); 
+    const {register, handleSubmit} = useForm(); 
     const [search, setSearch]= useState(false);
 
 
@@ -42,7 +42,7 @@ const JobPosts = () =>{
       console.log("Searching for tutors that tutoring  " + keyword);
     }
 
-    
+
     function Post(props){
       return (
         <div className={'card-body justify-content jobpost' } >
