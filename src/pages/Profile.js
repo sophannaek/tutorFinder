@@ -2,16 +2,19 @@ import React, {useEffect, useState} from 'react';
 import { useSession } from '../firebase/UserProvider';
 import {firestore} from '../firebase/config';
 import {useParams, Link} from 'react-router-dom';
-import {useForm} from 'react-hook-form';
 import { ProfileImage } from '../ProfileImage';
+import Alert from 'react-bootstrap/Alert'
+import FormError from '../FormError';
+
+
 
 
 const Profile = () => {
   const { user } = useSession();
   const params = useParams(); 
-  //add form register
-//   const {register, setValue, handleSubmit} = useForm(); 
   const [isLoading, setLoading]= useState(false);
+  const [show, setShow] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const [form, setForm] = useState({
       name: user.name,
       email:'',
@@ -40,10 +43,29 @@ const Profile = () => {
         const documentData = doc.data(); 
         setForm(documentData);
         setLoading(false);
+        
       }
     });
     return unsubscribe; 
   },[ user.uid,params.id]);
+
+
+  const deactivate = async()=>{
+    setShow(false);
+    console.log("deleting...")
+    await deleteUser(user);
+  }
+
+  const deleteUser = async(user,props) =>{
+    console.log("starting deleting "+user.displayName);
+    await user.delete().then(function(){
+      console.log('user deleted');
+      props.history.push(`/signup`);
+  
+    }).catch(function(error){
+        setErrorMsg(error.message);      
+    });
+  }
 
   const formClassname = `container mt-3 ${isLoading ?'loading': ''}`;
   
@@ -51,8 +73,8 @@ const Profile = () => {
     
     <div className={formClassname}>
         <p className="left"> Welcome back <b>{form.name}</b>!</p>
-        {/* <h2 className="font-weight-dark mt-2 mb-5">Profile Page</h2> */}
         <hr/>
+
         <div className="row">
             <div className="col-sm-4">
                 <div className="mt-2" style={{ maxWidth: 560}}>
@@ -89,11 +111,12 @@ const Profile = () => {
                                 <td>{form.bio}</td>
                             </tr>
                             <tr>
-                                <th>Need Help With</th>
+                                {form.userType === 'tutor' ? <th> Expertise </th>:<th>Need Help With</th> }
                                 <td>{form.subjectName}</td>
                             </tr>
                             <tr>
-                                <th>Max Affordable Rate</th>
+                                {form.userType ==='tutor' ? <th>Hourly Rate</th>: <th>Max Affordable Rate</th>}
+                                
                                 <td>$ {form.payRate}</td>
                             </tr>
                             <tr>
@@ -115,14 +138,59 @@ const Profile = () => {
 
                            
                         </table>
-                    <button className = "btn btn-sm btn-outline-secondary" title="view profile">
-                    <Link className="nav-item nav-link"
-                         to={`/editprofile/${params.id}`}
-                    >Edit Your Profile</Link> 
-              </button>
+                        <hr/>
+                        {!show && !errorMsg &&
+                            <div className='row'>
+                                <div className='col-sm-6'>
+                                    <button className = "btn btn-sm btn-outline-secondary" title="deactivate profile">
+                                        <Link className="nav-item nav-link"
+                                            onClick={() => {setShow(true)}}
+                                        >Deactivate Your Account </Link> 
+                                        {/* Deactivate Your Account */}
+                                    </button>
+                                </div>
+                                <div className='col-sm-4'>
+                                    <button className = "btn btn-sm btn-outline-secondary" title="edit profile">
+                                        <Link className="nav-item nav-link"
+                                            to={`/editprofile/${params.id}`}
+                                        >Edit Your Profile</Link> 
+                                    </button>
+                                </div>
+
+                            </div> 
+                        }
+                        
+                        {!!errorMsg && 
+                            <FormError 
+                            theMessage={errorMsg} 
+                             />
+  
+                        }
+                    
+                        {!!show &&
+                            <Alert variant="danger">
+                                <div>
+                                <p>Are you sure you want to deactivate your account?</p>
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <button className="btn btn-sm btn-outline-danger" 
+                                        onClick={deactivate}
+                                        >Deactivate Now</button>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <button className="btn btn-sm btn-outline-danger" onClick={()=>{setShow(false)}}>Not Now</button>
+                                    </div>
+                                </div>
+                                
+                                </div>
+                                
+                            </Alert>
+                        }
+
+                        
+                       
                 </div>
         </div>
-           
     </div>   
    
   )}
