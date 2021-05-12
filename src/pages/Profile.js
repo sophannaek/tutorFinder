@@ -79,7 +79,6 @@ const Profile = () => {
             <div className="col-sm-4">
                 <div className="mt-2" style={{ maxWidth: 560}}>
                     <ProfileImage id={params.id} readOnly={true} />
-                    <img src="" />
                 </div>
                 <div className="mt-5">
                     <button className = "btn btn-sm btn-outline-secondary" title="view profile">

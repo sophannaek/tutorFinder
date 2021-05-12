@@ -9,12 +9,15 @@ export const ProfileImage = ({ id, readOnly }) => {
     
     useEffect(() => {
         try{
-            getDownloadUrl(id).then((url) => !!url && setImageUrl(url));
+            getDownloadUrl(id).then((url) => !!url && setImageUrl(url))
+            .catch(error => {
+                console.log(error);
+                setImageUrl("/profile-placeholder.png");
+            });
         }
         catch(error){
             console.log(error);
         }
-        
         
     }, [id]);
 
