@@ -261,8 +261,8 @@ const EditProfile = (props) => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-group text-right mb-0">
-                        <button className="btn custom-btn" type="submit" >
+                    <div className="form-group text-center mt-2 mb-0">
+                        <button className="btn btn-outline-secondary" type="submit" >
                         Submit
                         </button>
                     </div>

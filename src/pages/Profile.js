@@ -6,9 +6,6 @@ import { ProfileImage } from '../ProfileImage';
 import Alert from 'react-bootstrap/Alert'
 import FormError from '../FormError';
 
-
-
-
 const Profile = () => {
   const { user } = useSession();
   const params = useParams(); 
@@ -42,13 +39,11 @@ const Profile = () => {
       if(doc.exists){
         const documentData = doc.data(); 
         setForm(documentData);
-        setLoading(false);
-        
+        setLoading(false);       
       }
     });
     return unsubscribe; 
   },[ user.uid,params.id]);
-
 
   const deactivate = async()=>{
     setShow(false);
@@ -57,9 +52,9 @@ const Profile = () => {
   }
 
   const deleteUser = async(user,props) =>{
-    console.log("starting deleting "+user.displayName);
+    // console.log("starting deleting "+user.displayName);
     await user.delete().then(function(){
-      console.log('user deleted');
+    //   console.log('user deleted');
       props.history.push(`/signup`);
   
     }).catch(function(error){

@@ -1,6 +1,6 @@
 import { firestore, storage} from './config';
 
-export const createUserDocument = async (user,data) => {
+export const createUserDocument = async (user) => {
   // get a reference to the Firestore document
   const docRef = firestore.doc(`/users/${user.uid}`);
 

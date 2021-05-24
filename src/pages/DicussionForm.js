@@ -6,18 +6,18 @@ import firebase from 'firebase';
 
 // need to add timestamp 
 
-const JobForm= (props) => {
+const DicussionForm= (props) => {
     const { user } = useSession();
     const { register, handleSubmit, reset } = useForm();
     const [isLoading, setLoading] = useState(false);
     // const userId = user.uid; 
 
-    const createJob = async(data) =>{
+    const createDicussion = async(data) =>{
         // console.log(userId)
         const docRef = firestore.doc(`/jobs/${user.uid}`);
         console.log(docRef)
         // create a job object
-        const job = {
+        const post = {
             uid: user.uid,
             name:user.displayName,
             email:user.email,
@@ -28,14 +28,14 @@ const JobForm= (props) => {
 
         }
         
-        await docRef.set(job)
+        await docRef.set(post)
         return docRef;
     };
 
     const onSubmit = async (data) => {
         let newForm;
         setLoading(true);
-        newForm = await createJob(data);
+        newForm = await createDicussion(data);
         reset(); 
         if (newForm) {
             console.log("succesfully created a job post");
@@ -49,7 +49,7 @@ const JobForm= (props) => {
     const formClassname = `container mt-3 ${isLoading ?'loading': ''}`;
     return (
         <div className={formClassname}>
-            <h3>Job Form</h3>
+            <h3>Dicussion Board</h3>
             <hr/>
 
             <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
@@ -58,7 +58,7 @@ const JobForm= (props) => {
                     <div className="col-lg-8">
                     <div className="card bg-light">
                         <div className="card-body">
-                        <h3 className="font-weight-light mb-3">Tutoring Request Form</h3>
+                        <h3 className="font-weight-light mb-3">Your Post</h3>
                         <hr/>
                         <div className="form-row">
                             <section className="col-sm-12 form-group">
@@ -67,7 +67,7 @@ const JobForm= (props) => {
                                 className="form-control"
                                 type="text"
                                 id="displayName"
-                                placeholder=" What subject do you need help on? "
+                                placeholder=" Dicussion topic?  "
                                 name="subject"
                                 required
                                 {...register('subject')}
@@ -79,14 +79,14 @@ const JobForm= (props) => {
                             <textarea
                             className="form-control"
                             type="text"
-                            placeholder="Tell a little bit about yourself"
+                            placeholder="Details about the topic you'd like to discuss."
                
                             name="description"
                             {...register('description')}
                             />
                         </section>
               
-                        <div className="form-row">
+                        {/* <div className="form-row">
                             <section className="col-sm-6 form-group">
                             <input
                                 className="form-control"
@@ -108,8 +108,7 @@ const JobForm= (props) => {
                                 
                             />
                             </section>
-                            {/* <p>{errorMessage}</p> */}
-                        </div>
+                        </div> */}
 
 
                         <div className="form-group text-right mb-0">
@@ -131,4 +130,4 @@ const JobForm= (props) => {
 
 };
 
-export default JobForm; 
+export default DicussionForm; 

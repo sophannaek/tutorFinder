@@ -6,7 +6,7 @@ import {GoMail} from 'react-icons/go';
 import SearchResults from 'react-filter-search';
 import {useForm} from 'react-hook-form';
 
-
+const fs = require('fs');
 
 const UserApi = () =>{
     const [users, setUsers] = useState([]);
@@ -14,6 +14,7 @@ const UserApi = () =>{
     useEffect(() => {
         const usersRef = firestore.collection('users');
         const tutorList = []
+       
         const unsubscribe = usersRef.onSnapshot((querySnapshot) => {
             //return array of users -- only tutors 
           const users = querySnapshot.docs.map((doc) => doc.data());
@@ -26,27 +27,19 @@ const UserApi = () =>{
           }
           tutorList.sort();
           setUsers(tutorList);
+          let data = JSON.stringify(tutorList);
+          let jsonData = JSON.parse(data);//this is what i want 
+          console.log(data)
+          console.log(jsonData)
+    
         });
         return unsubscribe;
       }, []);
 
 
     return (
-        // <div>{JSON.stringify(users)}</div>
 
         <div className="left">{JSON.stringify(users)}</div>
-
-
-        // <div>{users}</div>
-        // <div style={{textAlign:'left'}}>
-        //         {users.map((tutor)=> (
-        //                 <div className="col-12 col-sm-12 col-md-8 col-lg-6 mb-2 p-0 px-1"
-        //                 key={tutor.uid} >
-        //                      {JSON.stringify([tutor])}
-                            
-        //                 </div>
-        //         ))}
-        //     </div>
     );
 };
 

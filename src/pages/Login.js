@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { login } from '../firebase/auth';
+import { login,signup,signInWithGoogle, signInWithGitHub } from '../firebase/auth';
 import FormError from '../FormError';
+import {Link} from 'react-router-dom';
+// import {  } from '../firebase/auth';
+
+
 
 function Login(props) {
   const { register, handleSubmit, reset } = useForm();
@@ -26,7 +30,23 @@ function Login(props) {
       }else{
           setLoading(false);
       }
-  };
+};
+const googleSignIn = async()=>{
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+    //   this.setState({ error: error.message });
+    }
+  }
+
+const githubSignIn = async()=>{
+    try {
+      await signInWithGitHub();
+    } catch (error) {
+      console.log(error)
+    //   this.setState({ error: error.message });
+    }
+  }
 
 
 const formClassName = `mt-3 ${isLoading ? 'loading': ''} `;
@@ -79,6 +99,23 @@ return(
                
                     </div>
                 </div>
+
+                <hr/>
+                   
+                <div className='form-row justify-content-left ml-3 mb-3'>
+                    <div>
+                        <p>You can also sign in with any of these services</p>
+                    </div>
+                    <div>
+                        <button className="btn btn-outline-dark mr-2" type="button" onClick={googleSignIn}>
+                            Sign up with Google
+                        </button>
+                        <button className="btn btn-outline-dark" type="button" onClick={githubSignIn}>
+                            Sign up with GitHub
+                        </button>
+                    </div> 
+                </div>
+               
                 </div>
             </div>
             </div>

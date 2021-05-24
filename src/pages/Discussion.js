@@ -6,20 +6,19 @@ import {useForm} from 'react-hook-form';
 
 // only show the post that are current up to date 
 
-const JobPosts = () =>{
-    const [jobs, setJobs] = useState([]);
+const DicussionPosts = () =>{
+    const [dicussion, setDicussion] = useState([]);
     const [keyword, setKeyword] = useState('');
     const {register, handleSubmit} = useForm(); 
     const [search, setSearch]= useState(false);
 
 
     useEffect(() => {
-        const jobsRef = firestore.collection('jobs');
-        const unsubscribe = jobsRef.onSnapshot((querySnapshot) => {
+        const dicussionRef = firestore.collection('dicussions');
+        const unsubscribe = dicussionRef.onSnapshot((querySnapshot) => {
             //return array of users -- only tutors 
-          const jobs = querySnapshot.docs.map((doc) => doc.data());
-          // console.log(jobs)
-          setJobs(jobs);
+          const dicussions = querySnapshot.docs.map((doc) => doc.data());
+          setDicussion(dicussions);
         });
         return unsubscribe;
       }, []);
@@ -95,7 +94,7 @@ const JobPosts = () =>{
                 <div >
 
                  {(search ? 
-                    <SearchResults value={keyword} data= {jobs}
+                    <SearchResults value={keyword} data= {dicussion}
 
                     renderResults={results => (
                       <div className="mt-4">
@@ -113,7 +112,7 @@ const JobPosts = () =>{
                   
                 </div>        
 
-            {  !search && jobs.map((job)=> (
+            {  !search && dicussion.map((job)=> (
                   <div className="row" key={job.uid} > 
                     <div className="card px-3 py-2 mb-2">
                       <Post job ={job} />
@@ -125,4 +124,4 @@ const JobPosts = () =>{
     );
 };
 
-export default JobPosts; 
+export default DicussionPosts; 

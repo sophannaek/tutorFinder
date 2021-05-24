@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { signup } from '../firebase/auth';
+import { signup,signInWithGoogle, signInWithGitHub } from '../firebase/auth';
 import FormError from '../FormError';
+import {Link} from 'react-router-dom';
 
 
 //should add formError --> password should be atleast 6 characters
@@ -34,6 +35,7 @@ function Signup(props){
             } catch (error) {
                 console.log(error);
                 errorMessage = error.message; 
+                setError(errorMessage);
             }
 
             if (newUser) {
@@ -43,6 +45,23 @@ function Signup(props){
             }
         }
     };
+
+    const googleSignIn = async()=>{
+        try {
+          await signInWithGoogle();
+        } catch (error) {
+        //   this.setState({ error: error.message });
+        }
+      }
+    
+    const githubSignIn = async()=>{
+        try {
+          await signInWithGitHub();
+        } catch (error) {
+          console.log(error)
+        //   this.setState({ error: error.message });
+        }
+      }
 
     
     const formClassName = `text-center mt-4 ${isLoading ? 'loading': ''} `;
@@ -129,12 +148,40 @@ function Signup(props){
                         Sign Up
                         </button>
                     </div>
+                    
                     </div>
+                <hr/>
+                   
+                <div className='form-row justify-content-left ml-3'>
+                    <p>You can also sign up with any of these services</p>
+                    <div>
+                        <button className="btn btn-outline-dark mr-2" type="button" onClick={googleSignIn}>
+                            Sign up with Google
+                        </button>
+                        <button className="btn btn-outline-dark" type="button" onClick={githubSignIn}>
+                            Sign up with GitHub
+                        </button>
+                    </div> 
+                </div>
+                <div>
+                    <hr/>
+                    <p className="form-row justify-content-left ml-3">Already have an account? <span> 
+                        <Link style={{color:'blue'}}
+                         to={`/login`}
+                    >Login</Link></span></p>
+                </div>
+            
+                
+            
                 </div>
                 </div>
+                
             </div>
+            
             </div>
+            
         </form>
+        
     </div>   
 );    
 }
