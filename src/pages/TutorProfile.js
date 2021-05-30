@@ -38,7 +38,7 @@ const TutorProfile = (tutor) => {
         }}
     });
     return unsubscribe; 
-    },[]);
+    },[tutor]);
  
   if (!tutorDocument) {
       console.log("document is null");

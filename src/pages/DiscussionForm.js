@@ -6,40 +6,47 @@ import firebase from 'firebase';
 
 // need to add timestamp 
 
-const DicussionForm= (props) => {
+const DiscussionForm = (props) => {
     const { user } = useSession();
     const { register, handleSubmit, reset } = useForm();
     const [isLoading, setLoading] = useState(false);
-    // const userId = user.uid; 
 
-    const createDicussion = async(data) =>{
-        // console.log(userId)
-        const docRef = firestore.doc(`/jobs/${user.uid}`);
-        console.log(docRef)
+    const createDiscussion = async(data) =>{
+        console.log(user.uid)
+        // const docRef = firestore.doc(`/discussions/${user.uid}`).collection('posts');
+
+        //works
+        const docRef = firestore.collection('discussions');
         // create a job object
         const post = {
             uid: user.uid,
+            id: '',
             name:user.displayName,
             email:user.email,
-            subject: data.subject,
-            maxRate: data.maxRate, 
-            time: data.time,
+            topic: data.topic,
+            detail: data.detail, 
+            likes: 0, 
+            comments: [],
+            // time: data.time,
             created: firebase.firestore.FieldValue.serverTimestamp()
 
         }
-        
-        await docRef.set(post)
+        await docRef.add(post).then((doc) => {
+            docRef.doc(doc.id).update({id: doc.id});
+        });
         return docRef;
     };
 
     const onSubmit = async (data) => {
+        console.log('creating dicussion form')
         let newForm;
         setLoading(true);
-        newForm = await createDicussion(data);
+        newForm = await createDiscussion(data);
         reset(); 
         if (newForm) {
-            console.log("succesfully created a job post");
-            props.history.push(`/profile/${user.uid}`);
+            console.log("succesfully created a discussion post");
+            //redirect to the discussion board 
+            props.history.push(`/discussion`);
         } else {
             setLoading(false);
         }
@@ -49,7 +56,7 @@ const DicussionForm= (props) => {
     const formClassname = `container mt-3 ${isLoading ?'loading': ''}`;
     return (
         <div className={formClassname}>
-            <h3>Dicussion Board</h3>
+            <h3>Discussion Board</h3>
             <hr/>
 
             <form className="mt-3" onSubmit={handleSubmit(onSubmit)}>
@@ -67,10 +74,10 @@ const DicussionForm= (props) => {
                                 className="form-control"
                                 type="text"
                                 id="displayName"
-                                placeholder=" Dicussion topic?  "
-                                name="subject"
+                                placeholder=" Discussion topic?  "
+                                name="topic"
                                 required
-                                {...register('subject')}
+                                {...register('topic')}
                                 
                             />
                             </section>
@@ -81,34 +88,11 @@ const DicussionForm= (props) => {
                             type="text"
                             placeholder="Details about the topic you'd like to discuss."
                
-                            name="description"
-                            {...register('description')}
+                            name="detail"
+                            {...register('detail')}
                             />
                         </section>
-              
-                        {/* <div className="form-row">
-                            <section className="col-sm-6 form-group">
-                            <input
-                                className="form-control"
-                                type="number"
-                                name="maxRate"
-                                placeholder="Maximum Rate "
-                                {...register('maxRate')}
-                            
-                            />
-                            </section>
-                            <section className="col-sm-6 form-group">
-                            <input
-                                className="form-control"
-                                type="text"
-                                required
-                                name="time"
-                                placeholder="How soon you need it?"
-                                {...register('time')}
-                                
-                            />
-                            </section>
-                        </div> */}
+            
 
 
                         <div className="form-group text-right mb-0">
@@ -130,4 +114,4 @@ const DicussionForm= (props) => {
 
 };
 
-export default DicussionForm; 
+export default DiscussionForm; 

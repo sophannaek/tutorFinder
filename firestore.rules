@@ -11,6 +11,20 @@ service cloud.firestore {
         allow write: if request.auth.uid == userId; 
         allow update: if request.auth.uid == userId; 
     }
+    match /discussions/{userId}/posts/{post} {
+        allow read: if true;
+        allow write: if request.auth.uid == userId; 
+        allow update: if request.auth.uid == userId; 
+    }
+    match /discussions/{userId}{
+      allow read, write, update: if true; 
+   
+    }
+    match /discussions/{discussionId}/comments {
+      allow read, write, update: if true; 
+      
+    }
+    
 
   }  
 } 

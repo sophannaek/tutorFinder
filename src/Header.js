@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FaUser,FaUsers, FaAngleDown} from 'react-icons/fa';
+import {FaUser,FaUsers, FaAngleDown, FaBlackberry} from 'react-icons/fa';
 import {Link} from '@reach/router';
 import { logout } from './firebase/auth';
 import { useHistory,useLocation } from 'react-router-dom';
@@ -23,13 +23,10 @@ function Header(){
     let isLoginPage = false;
     const [usertype, setUsertype] = useState("")
     if(user){
-        const docRef = firestore.collection('users').doc(user.uid);
-        // use snapshot --> provide real time changes without have to refresh the browser
-    
+        const docRef = firestore.collection('users').doc(user.uid);    
         docRef.onSnapshot((doc) =>{
             if(doc.exists){
                 const documentData = doc.data(); 
-                // console.log(documentData);
                 setUsertype(documentData.userType);
         }});
 
@@ -46,18 +43,24 @@ function Header(){
         history.push('/login');
     };
 
+    const gotoDiscussion = () =>{
+        history.push('/discussion');
+    }
+
     const navStyle={
-        backgroundColor: '#097295',
+        // backgroundColor: '#097295',
+        backgroundColor: '#4E5052'
     };
     const anchor={
         color:"white"
     };
+
     return (
         <nav className="site-nav family-sans navbar navbar-expand navbar-light higher"
         style={navStyle}>
            <div className="container-fluid">
            <Link to="/aboutus" className="navbar-brand" onClick={AboutUs} style={anchor} >
-              <FaUsers className="mr-1" style={anchor}/>
+              <FaUsers className="mr-1 brand-color" />
                tutorFinder
            </Link>
            <div className="navbar-nav ml-auto">
@@ -65,7 +68,7 @@ function Header(){
                    <Link className="nav-item nav-link" to={`/profile/${user.uid}`} 
                     onClick = {Profile}
                     style={anchor}>
-                   <FaUser size={20} className="mr-1"/> {user.displayName}
+                   <FaUser size={16} className="mr-1 brand-color" />{user.displayName}
                    </Link>
                )
                
@@ -101,12 +104,20 @@ function Header(){
                    Sign Up
                </Link>
                )}
+               {
+                   !!user && (
+                        <Link className="nav-item nav-link" to="/discussion" onClick={gotoDiscussion} style={anchor}>
+                        Discussion
+                        </Link>
+                   )
+               }
 
                { !!user  && (
                    <Link className="nav-item nav-link" to="/login" onClick={logoutUser} style={anchor}>
                    Log Out
                </Link>
                )}
+               
                
                
            </div>

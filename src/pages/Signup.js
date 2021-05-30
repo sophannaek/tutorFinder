@@ -5,8 +5,6 @@ import FormError from '../FormError';
 import {Link} from 'react-router-dom';
 
 
-//should add formError --> password should be atleast 6 characters
-
 function Signup(props){
     const { register, handleSubmit, reset } = useForm();
     const [isLoading, setLoading] = useState(false);
@@ -17,7 +15,6 @@ function Signup(props){
         let newUser;
         let info; 
         setLoading(true);
-        console.log('data: '+data.displayName)
         if(data.password !== data.RepeatedPassword){
             errorMessage = "passwords do not match!";
             setError(errorMessage)
@@ -50,7 +47,7 @@ function Signup(props){
         try {
           await signInWithGoogle();
         } catch (error) {
-        //   this.setState({ error: error.message });
+            console.log(error.message);
         }
       }
     
@@ -58,8 +55,7 @@ function Signup(props){
         try {
           await signInWithGitHub();
         } catch (error) {
-          console.log(error)
-        //   this.setState({ error: error.message });
+          console.log(error.message)        
         }
       }
 
@@ -142,9 +138,8 @@ function Signup(props){
                         </section>
                         <p>{errorMessage}</p>
                     </div>
-                    {/* when the errormessage not null --> disable the button  */}
                     <div className="form-group text-right mb-0">
-                        <button className="btn custom-btn" type="submit" >
+                        <button className="btn custom-btn" type="submit">
                         Sign Up
                         </button>
                     </div>
@@ -165,10 +160,10 @@ function Signup(props){
                 </div>
                 <div>
                     <hr/>
-                    <p className="form-row justify-content-left ml-3">Already have an account? <span> 
-                        <Link style={{color:'blue'}}
+                    <p className="form-row justify-content-left ml-3">Already have an account?  <span> 
+                        <Link style={{color:'#DF734E'}}
                          to={`/login`}
-                    >Login</Link></span></p>
+                    > Login</Link></span></p>
                 </div>
             
                 

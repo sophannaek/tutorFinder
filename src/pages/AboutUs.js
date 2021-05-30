@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import { Link } from '@reach/router';
-import { useHistory} from 'react-router-dom';
 import { useSession } from '../firebase/UserProvider';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
@@ -40,7 +39,7 @@ function AboutUs() {
                         </p>
 
                     { !user && (
-                        <Link to="/signup" className="btn btn-outline-light mr-2 bigLead" onClick={Signup}>
+                        <Link to="/signup" className="btn btn-outline-light  mr-2 bigLead" onClick={Signup}>
                             Sign Up
                         </Link>
                     )}

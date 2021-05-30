@@ -9,7 +9,7 @@ export const createUserDocument = async (user) => {
     uid: user.uid,
     email: user.email,
     name: user.displayName,
-    userType:'',
+    userType:'tutee',
     address: '',
     city: '',
     state: '',

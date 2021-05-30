@@ -15,8 +15,9 @@ import TutorProfile from './pages/TutorProfile';
 import JobForm from './pages/JobForm';
 import JobPosts from './pages/JobPosts';
 import EditProfile from './pages/EditProfile';
-import Dicussion from './pages/Discussion';
-import DicussionForm from './pages/DicussionForm';
+import Discussion from './pages/Discussion';
+import DiscussionForm from './pages/DiscussionForm';
+import DiscussionPage from './pages/DiscussionPage';
 
 
 
@@ -40,9 +41,9 @@ function App() {
               <Route exact path="/tutors/profile/:id" component = {TutorProfile} />
               <Route exact path="/jobform" component={JobForm} />
               <Route exact path='/editprofile/:id' component={EditProfile}  />
-              {/* <Route exact path='/api/' component={UserApi} /> */}
-              <Route exact path='/dicussion' component={Dicussion} />
-              <Route exact path='/dicussionForm' component={DicussionForm} />
+              <Route exact path='/discussion' component={Discussion} />
+              <Route exact path="/discussionForm" component={DiscussionForm} />
+              <Route exact path="/discussionPage/:id" component={DiscussionPage}/>
             </Switch> 
           
           </BrowserRouter>
