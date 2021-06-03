@@ -53,6 +53,17 @@ const Profile = () => {
 
   const deleteUser = async(user,props) =>{
     // console.log("starting deleting "+user.displayName);
+
+    //remove user from 'users' collection 
+    firestore.collection('users').doc(`${user.uid}`).delete().then(() =>{
+        console.log("document successfully deleted!");
+    })
+
+    //remove any job postings created by this user 
+    firestore.collection('jobs').doc(`${user.uid}`).delete().then(() =>{
+        console.log("All jobs posted by this user successfully deleted!");
+    })
+
     await user.delete().then(function(){
     //   console.log('user deleted');
       props.history.push(`/signup`);

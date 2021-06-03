@@ -123,7 +123,7 @@ a:hover{
   background-color:whitesmoke;
 }
 .comment-post{
-  background-color: whitesmoke;
+  background-color: white;
   /* background-color:#E9F3FB; */
   /* background-color:#CDE6F9; */
   border-radius:5px 5px;
@@ -136,4 +136,19 @@ a:hover{
 }
 .brand-color{
   color: #DF734E;
+}
+
+.gray{
+  color:lightgray;
+}
+
+.discussionPage{
+  border:1px solid lightgray;
+  border-radius: 2px 2px;
+  background-color:whitesmoke;
+}
+
+.link:hover{
+  font-weight:bolder;
+  color:#DF734E;
 }

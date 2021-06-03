@@ -18,7 +18,7 @@ import EditProfile from './pages/EditProfile';
 import Discussion from './pages/Discussion';
 import DiscussionForm from './pages/DiscussionForm';
 import DiscussionPage from './pages/DiscussionPage';
-
+import EditDiscussion from './pages/EditDiscussion';
 
 
 function App() {
@@ -44,6 +44,7 @@ function App() {
               <Route exact path='/discussion' component={Discussion} />
               <Route exact path="/discussionForm" component={DiscussionForm} />
               <Route exact path="/discussionPage/:id" component={DiscussionPage}/>
+              <Route exact path="/editDiscussion/:id" component={EditDiscussion} />
             </Switch> 
           
           </BrowserRouter>

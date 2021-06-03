@@ -165,7 +165,9 @@ const EditProfile = (props) => {
                         </section>
                         <section className="col-sm-6 form-group">
 
-                            <label>Pay Rate (USD)</label>
+                            {/* <label>Pay Rate (USD)</label> */}
+                            {form.userType ==='tutor' ? <label>Hourly Rate</label>: <label>Max Affordable Rate</label>}
+
                             <input
                                 className="form-control"
                                 type="number"

@@ -148,7 +148,7 @@ function Signup(props){
                 <hr/>
                    
                 <div className='form-row justify-content-left ml-3'>
-                    <p>You can also sign up with any of these services</p>
+                    {/* <p>You can also sign up with any of these services</p> */}
                     <div>
                         <button className="btn btn-outline-dark mr-2" type="button" onClick={googleSignIn}>
                             Sign up with Google

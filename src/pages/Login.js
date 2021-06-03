@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { login,signup,signInWithGoogle, signInWithGitHub } from '../firebase/auth';
+import { login,signInWithGoogle, signInWithGitHub } from '../firebase/auth';
 import FormError from '../FormError';
-import {Link} from 'react-router-dom';
-// import {  } from '../firebase/auth';
 
 
 
@@ -103,9 +101,7 @@ return(
                 <hr/>
                    
                 <div className='form-row justify-content-left ml-3 mb-3'>
-                    <div>
-                        <p>You can also sign in with any of these services</p>
-                    </div>
+               
                     <div>
                         <button className="btn btn-outline-dark mr-2" type="button" onClick={googleSignIn}>
                             Sign up with Google

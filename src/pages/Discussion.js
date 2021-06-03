@@ -4,7 +4,8 @@ import { firestore } from '../firebase/config';
 import SearchResults from 'react-filter-search';
 import {useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
-import {FaTrashAlt,FaRegCalendarAlt,FaUserCircle, FaCommentAlt, FaPencilAlt} from 'react-icons/fa';
+import {FaRegCalendarAlt,FaUserCircle, FaCommentAlt} from 'react-icons/fa';
+import { AiFillLike } from "react-icons/ai";
 
 
 
@@ -16,10 +17,7 @@ const DiscussionPosts = () =>{
     const [search, setSearch]= useState(false);
 
 
-    useEffect(() => {
-        //it works 
-        // const discussionRef = firestore.collection(`discussions`).doc(user.uid).collection('posts');
-        
+    useEffect(() => {        
         // console.log(user.uid)
         const discussionRef = firestore.collection('discussions');
         const unsubscribe = discussionRef.onSnapshot((querySnapshot) =>{
@@ -66,20 +64,22 @@ const DiscussionPosts = () =>{
               <p className="card-text">{props.discussion.detail}</p>
               <hr className='small mb-0'/>
               <div className='row small'>
-                <div className='col-sm-4'>
+                <div className='col-sm-3'>
                   <p><FaUserCircle/> {props.discussion.name}</p>
                 </div>
-                <div className='col-sm-4 '>
+                <div className='col-sm-3 '>
                   <p><FaRegCalendarAlt /> {props.discussion.created.toDate().toDateString()}</p>
                 </div>
-                <div className='col-sm-4'>
+                <div className='col-sm-3'>
+                  <AiFillLike /> {props.discussion.whoLiked.length}
+                </div>
+                <div className='col-sm-3'>
                   <FaCommentAlt/> {props.discussion.comments.length}
                 </div>
+                
               </div>
              
-              <button className="btn btn-sm btn-outline-dark" 
-                // onClick={deactivate}
-                >
+              <button className="btn btn-sm btn-outline-dark" >
                   <Link className="nav-item nav-link small" to={`/discussionPage/${props.discussion.id}`}
                               >View Discussion</Link> 
                 </button>

@@ -19,6 +19,9 @@ const JobPosts = () =>{
             //return array of users -- only tutors 
           const jobs = querySnapshot.docs.map((doc) => doc.data());
           // console.log(jobs)
+          jobs.sort(function(a,b) {
+            return b.created - a.created;
+          });
           setJobs(jobs);
         });
         return unsubscribe;

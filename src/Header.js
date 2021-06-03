@@ -22,12 +22,14 @@ function Header(){
     // console.log(user.uid)
     let isLoginPage = false;
     const [usertype, setUsertype] = useState("")
+    const [name,setName] = useState("")
     if(user){
         const docRef = firestore.collection('users').doc(user.uid);    
         docRef.onSnapshot((doc) =>{
             if(doc.exists){
                 const documentData = doc.data(); 
                 setUsertype(documentData.userType);
+                setName(documentData.name);
         }});
 
     }
@@ -68,7 +70,7 @@ function Header(){
                    <Link className="nav-item nav-link" to={`/profile/${user.uid}`} 
                     onClick = {Profile}
                     style={anchor}>
-                   <FaUser size={16} className="mr-1 brand-color" />{user.displayName}
+                   <FaUser size={16} className="mr-1 brand-color" />{name}
                    </Link>
                )
                

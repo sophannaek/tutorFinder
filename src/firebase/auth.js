@@ -21,17 +21,20 @@ export const signInWithGoogle = async()=>{
   .signInWithPopup(provider);
   const user = resp.user;
   const docRef = firestore.doc(`/users/${user.uid}`);  
-  if (!docRef.exists()){
+  if (!docRef.exists){
     await createUserDocument(user);  
   }  
 }
 
 export const signInWithGitHub = async()=>  {
   const provider = new firebase.auth.GithubAuthProvider();
-  const resp = await firebase.auth().signInWithPopup(provider);
+  const resp = await firebase
+  .auth()
+  .signInWithPopup(provider);
+
   const user = resp.user;
   const docRef = firestore.doc(`/users/${user.uid}`);  
-  if (!docRef.exists()){
+  if (!docRef.exists){
     await createUserDocument(user);  
   } 
 }
