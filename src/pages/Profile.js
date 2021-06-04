@@ -86,14 +86,21 @@ const Profile = () => {
                 <div className="mt-2" style={{ maxWidth: 560}}>
                     <ProfileImage id={params.id} readOnly={true} />
                 </div>
-                <div className="mt-5">
-                    <button className = "btn btn-sm btn-outline-secondary" title="view profile">
-                    <Link className="nav-item nav-link"
-                         to={`/JobForm/`}
-                    >Create a tutoring request</Link> 
-              </button>
 
-                </div>
+                {
+                    form.userType === 'tutee' ? (
+                        <div className="mt-5">
+                            <button className = "btn btn-sm btn-outline-secondary" title="view profile">
+                                <Link className="nav-item nav-link"
+                                to={`/JobForm/`}
+                            >Create a tutoring request</Link> 
+                            </button>
+
+                        </div>
+                    ):" "
+                }
+
+                
             </div>
             <div className="col-sm-6 ml-4">
     

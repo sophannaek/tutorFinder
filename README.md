@@ -2,6 +2,17 @@
 # tutorFinder
 A tutoring web application where users can be signed up either as tutor or student. The application is implemented in React JS and uses Google Firebase for user authentication, database, and file storages.
 
+## Demo 
+See in-progress [demo](https://sophannaek.github.io/project/tutorFinder.html)
+
+
+## Features
+* User Registration/Deactivation
+* User Authentication
+* Realtime CRUD using records in Firestore
+* Search Features
+* Comments and Like features
+
 
 ## Common Setup
 Clone the repo and install the dependencies 
